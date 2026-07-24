@@ -11,7 +11,7 @@ projeto: "[[Aegis]]"
 tipo: fonte-dados
 status: ativo
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Fontes de Dados
@@ -24,8 +24,8 @@ Fontes de dados são entradas externas ou internas que alimentam decisões, visu
 | --- | --- | --- | --- | --- |
 | Binance Futures WebSocket | Candles fechados | Não | Implementado | [[Market Data Binance]] |
 | Binance Futures REST klines | Candles históricos/backfill | Não | Implementado como client | [[Market Data Binance]] |
-| Quant Engine fake | Sinal quantitativo | Não | Implementado | [[Quant Engine]] |
-| Quant Engine gRPC | Sinal quantitativo externo | Depende do serviço | Contrato pronto, client real pendente | [[Quant Engine]] |
+| Quant Engine fake | Sinal quantitativo | Não | Implementado, em uso pelo `trading-core` | [[Quant Engine]] |
+| Quant Engine gRPC (`quant.v1`) | Sinal quantitativo, features, backtest, otimização | Depende do serviço | Serviço Rust implementado e testado; client Go real pendente | [[Quant Engine]] |
 | RSS | Notícias/eventos | Não | Provider implementado, scheduler pendente | [[Eventos de Mercado e LLM]] |
 | LLM noop/Gemini | Classificação de eventos | Gemini exige API key | Implementado | [[Eventos de Mercado e LLM]] |
 | Broker Paper/Binance | Estado de ordens, posições e conta | Binance exige API key | Implementado | [[06 - Segurança e Risco]] |

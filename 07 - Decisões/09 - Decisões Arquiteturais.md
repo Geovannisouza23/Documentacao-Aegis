@@ -11,14 +11,16 @@ projeto: "[[Aegis]]"
 tipo: indice
 status: ativo
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Decisões Arquiteturais
 
-O repositório mantém ADRs em `../trading-core/docs/decisions`.
+Este vault documenta dois conjuntos de ADRs, mantidos cada um no repositório a que pertence.
 
-## ADRs atuais
+## ADRs do `trading-core` (Go)
+
+Mantidas em `../trading-core/docs/decisions`.
 
 | ADR | Tema |
 | --- | --- |
@@ -32,8 +34,23 @@ O repositório mantém ADRs em `../trading-core/docs/decisions`.
 | 0008 | gRPC para integração futura com Rust |
 | 0009 | EventBus em memória para MVP |
 
+## ADRs do `quant-engine` (Rust)
+
+Mantidas em `../quant-engine/docs/decisions`. Cobrem as decisões tomadas durante a implementação completa do serviço — ver [[Quant Engine]] para o resumo do que cada uma significa na prática.
+
+| ADR | Tema |
+| --- | --- |
+| 0001 | Proto `quant.v1` redesenha, não estende, o placeholder do `trading-core` |
+| 0002 | Jobs pesados (backtest/otimização/export) rodam in-process, não em worker separado |
+| 0003 | Model Registry MVP em filesystem local |
+| 0004 | `ort` (bindings ONNX Runtime) como dependência sempre compilada — risco de rc-only aceito |
+| 0005 | Postgres é efetivamente obrigatório uma vez que `RegisterDecisionOutcome` é exercitado (gap: adapter ainda não existe) |
+| 0006 | Só 2 dos 7 consumers NATS originalmente planejados foram construídos |
+| 0007 | Colunas monetárias no Parquet são string, não `Decimal128` nativo |
+| 0008 | Um único semáforo compartilhado entre `Backtest`/`FeatureBatch`/`Optimization` |
+
 > [!tip] Manutenção
-> Toda decisão nova que muda fronteiras, risco, persistência, integração externa ou operação deve ganhar uma ADR.
+> Toda decisão nova que muda fronteiras, risco, persistência, integração externa ou operação deve ganhar uma ADR — no repositório a que pertence.
 
 ## Links internos
 
@@ -42,6 +59,7 @@ O repositório mantém ADRs em `../trading-core/docs/decisions`.
 - [[06 - Segurança e Risco]]
 - [[Contratos e Eventos]]
 - [[Banco de Dados]]
+- [[Quant Engine]]
 
 ## Quando criar nova ADR
 

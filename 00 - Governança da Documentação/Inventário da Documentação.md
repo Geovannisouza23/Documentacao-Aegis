@@ -10,7 +10,7 @@ projeto: "[[Aegis]]"
 tipo: indice
 status: ativo
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Inventário da Documentação
@@ -30,13 +30,13 @@ updated: 2026-07-23
 | [[Banco de Dados]] | DLS | `dls` | `../trading-core/internal/infrastructure/database` |
 | [[Fontes de Dados]] | Fontes de Dados | `fonte-dados` | Adapters externos |
 | [[Market Data Binance]] | Fontes de Dados | `fonte-dados` | `marketdata/{websocket,rest}` |
-| [[Quant Engine]] | Fontes de Dados | `fonte-dados` | `ports/output/quant_engine.go` |
+| [[Quant Engine]] | Fontes de Dados | `fonte-dados` | `ports/output/quant_engine.go` (Go) + `../quant-engine` (Rust, serviço completo) |
 | [[Eventos de Mercado e LLM]] | Fontes de Dados | `fonte-dados` | `news`, `llm`, `schemas` |
 | [[04 - Execução Local]] | Operação | `guia` | `../trading-core/README.md` |
 | [[Modos Operacionais]] | Operação | `referencia` | `domain/operation` |
 | [[08 - Testes e Qualidade]] | Qualidade | `referencia` | `../trading-core/tests` |
-| [[09 - Decisões Arquiteturais]] | Decisões | `indice` | `../trading-core/docs/decisions` |
-| [[10 - Backlog e Lacunas]] | Planejamento | `backlog` | README + análise do código |
+| [[09 - Decisões Arquiteturais]] | Decisões | `indice` | `../trading-core/docs/decisions` + `../quant-engine/docs/decisions` |
+| [[10 - Backlog e Lacunas]] | Planejamento | `backlog` | README + análise do código + `../quant-engine/docs/architecture.md` |
 
 ## Manutenção
 
