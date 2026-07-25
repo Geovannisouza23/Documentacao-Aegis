@@ -38,10 +38,19 @@ Detalhado em `../quant-engine/docs/architecture.md` (seção "Known gaps") e nas
 
 - [ ] `EvaluateSignal` não consulta o modelo de inferência ainda — toda resposta volta com `inference_mode: DISABLED`, mesmo quando o caller pede outro modo.
 - [ ] `DecisionRepository` (árvore `TrainingRecord`, usada por `RegisterDecisionOutcome`/`ExportDataset`) só tem implementação em memória — outcomes não sobrevivem a restart do processo.
-- [ ] Nenhum arquivo `.onnx` de fixture existe no repo — o caminho de carga bem-sucedida do `ModelLoader` (via ONNX Runtime real) não é coberto pela suíte automatizada, só os caminhos de rejeição.
+- [ ] Nenhum arquivo `.onnx` de fixture existe no repo — o caminho de carga bem-sucedida do `ModelLoader` (via ONNX Runtime real) não é coberto pela suíte automatizada, só os caminhos de rejeição. **Agora que o `training-pipeline` existe e exporta ONNX real e auto-verificado, gerar esse fixture cross-repo é um próximo incremento natural** — ver [[Training Pipeline]].
 - [ ] Walk-forward e Monte Carlo existem como algoritmos de domínio testados, mas não estão conectados a `RunOptimization` — uma requisição com essas flags roda a mesma busca de passo único de sempre.
 - [ ] `ObjectStorage` está implementado e testado mas não é usado por nenhum caso de uso ainda.
 - [ ] `quant-backtest-worker`/`quant-feature-worker`/`quant-optimizer-worker` ainda não são especializados por tipo de job — os três rodam o mesmo processo genérico hoje (ADR 0002 do `quant-engine`).
+
+### Training Pipeline (Python) — gaps do próprio serviço
+
+As 13 etapas planejadas estão completas (ver [[Training Pipeline]]); gaps restantes são de integração cross-repo e maturidade de processo, não de funcionalidade faltando:
+
+- [ ] `quant-engine` ainda não calcula/popula labels reais (`label_version`/`profitable_trade`/`net_return`/`forward_return_n_candles`) em nenhum caso de uso — todo dataset exportado hoje chega ao `training-pipeline` sem rótulo. `ValidateLabelSchema` já detecta e reporta isso explicitamente; o pipeline funciona ponta a ponta contra fixtures rotulados e não precisa de mudança de código quando esse gap do lado Rust fechar.
+- [ ] Nenhuma execução real de treino aconteceu ainda contra um dataset exportado de verdade pelo `quant-engine` — só contra fixtures sintéticos gerados pelo próprio `training-pipeline`.
+- [ ] `registry_root` do `training-pipeline` e `model_registry_root` do `quant-engine` apontam por padrão para caminhos locais desacoplados — apontar os dois para o mesmo volume compartilhado é uma configuração manual de operador, ainda não feita/documentada como runbook.
+- [ ] `docs/decisions/` do `training-pipeline` está vazia — decisões estruturais (versão lexicográfica, `CANARY` fora de escopo, `registry_root` desacoplado por padrão) existem em prosa mas não como ADR formal.
 
 ### API e dashboard
 

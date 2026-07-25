@@ -22,6 +22,7 @@ Use esta seção para entender de onde vêm dados, sinais e classificações usa
 - [[Fontes de Dados]]
 - [[Market Data Binance]]
 - [[Quant Engine]]
+- [[Training Pipeline]]
 - [[Eventos de Mercado e LLM]]
 
 ## Próximas leituras

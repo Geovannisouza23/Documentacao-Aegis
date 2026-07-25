@@ -49,6 +49,11 @@ Mantidas em `../quant-engine/docs/decisions`. Cobrem as decisões tomadas durant
 | 0007 | Colunas monetárias no Parquet são string, não `Decimal128` nativo |
 | 0008 | Um único semáforo compartilhado entre `Backtest`/`FeatureBatch`/`Optimization` |
 
+## ADRs do `training-pipeline` (Python)
+
+> [!warning] Sem ADRs próprias ainda
+> `../training-pipeline/docs/decisions/` existe mas está vazia. As decisões estruturais do serviço (7 estados de lifecycle vs. 3 reconhecidos pelo `quant-engine`, versão lexicográfica, `registry_root` desacoplado por padrão, `CANARY` fora de escopo) estão documentadas em prosa em `../training-pipeline/docs/model-registry.md` e [[Training Pipeline]], mas não formalizadas como ADR. Ver [[10 - Backlog e Lacunas]].
+
 > [!tip] Manutenção
 > Toda decisão nova que muda fronteiras, risco, persistência, integração externa ou operação deve ganhar uma ADR — no repositório a que pertence.
 
@@ -60,6 +65,7 @@ Mantidas em `../quant-engine/docs/decisions`. Cobrem as decisões tomadas durant
 - [[Contratos e Eventos]]
 - [[Banco de Dados]]
 - [[Quant Engine]]
+- [[Training Pipeline]]
 
 ## Quando criar nova ADR
 

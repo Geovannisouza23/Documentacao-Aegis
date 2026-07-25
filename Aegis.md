@@ -10,15 +10,15 @@ tags:
 tipo: indice
 status: ativo
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Aegis
 
-Aegis é o projeto de automação operacional para trading. O componente atual do projeto é o `trading-core`, um núcleo em Go responsável por ingestão de mercado, avaliação de sinais, gestão determinística de risco, execução de ordens, reconciliação com broker e APIs para dashboard.
+Aegis é o projeto de automação operacional para trading, um poly-repo com três serviços independentes: `trading-core` (Go — a única autoridade operacional: ingestão de mercado, avaliação de sinais, gestão determinística de risco, execução de ordens, reconciliação com broker e APIs para dashboard), `quant-engine` (Rust — indicadores, features, regime, estratégias, backtest/otimização e inferência de modelo via ONNX) e `training-pipeline` (Python — treino, validação, avaliação e exportação dos modelos ML que o `quant-engine` consome).
 
 > [!info] Escopo desta documentação
-> Este vault documenta o projeto em português e fica fora do repositório `trading-core`. O código-fonte permanece em `../trading-core`.
+> Este vault documenta o projeto em português e fica fora dos repositórios de código. O código-fonte permanece em `../trading-core`, `../quant-engine` e `../training-pipeline`.
 
 ## Mapa por seção
 

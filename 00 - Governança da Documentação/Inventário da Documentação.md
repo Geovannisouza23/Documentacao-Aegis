@@ -31,6 +31,7 @@ updated: 2026-07-24
 | [[Fontes de Dados]] | Fontes de Dados | `fonte-dados` | Adapters externos |
 | [[Market Data Binance]] | Fontes de Dados | `fonte-dados` | `marketdata/{websocket,rest}` |
 | [[Quant Engine]] | Fontes de Dados | `fonte-dados` | `ports/output/quant_engine.go` (Go) + `../quant-engine` (Rust, serviço completo) |
+| [[Training Pipeline]] | Fontes de Dados | `fonte-dados` | `../training-pipeline` (Python, serviço completo) |
 | [[Eventos de Mercado e LLM]] | Fontes de Dados | `fonte-dados` | `news`, `llm`, `schemas` |
 | [[04 - Execução Local]] | Operação | `guia` | `../trading-core/README.md` |
 | [[Modos Operacionais]] | Operação | `referencia` | `domain/operation` |

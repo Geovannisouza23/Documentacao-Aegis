@@ -26,6 +26,7 @@ Fontes de dados são entradas externas ou internas que alimentam decisões, visu
 | Binance Futures REST klines | Candles históricos/backfill | Não | Implementado como client | [[Market Data Binance]] |
 | Quant Engine fake | Sinal quantitativo | Não | Implementado, em uso pelo `trading-core` | [[Quant Engine]] |
 | Quant Engine gRPC (`quant.v1`) | Sinal quantitativo, features, backtest, otimização | Depende do serviço | Serviço Rust implementado e testado; client Go real pendente | [[Quant Engine]] |
+| Model Registry (`training-pipeline`) | Modelos ONNX + metadata para inferência | Não (filesystem local) | Serviço Python implementado e testado; `quant-engine` só lê, nunca escreve | [[Training Pipeline]] |
 | RSS | Notícias/eventos | Não | Provider implementado, scheduler pendente | [[Eventos de Mercado e LLM]] |
 | LLM noop/Gemini | Classificação de eventos | Gemini exige API key | Implementado | [[Eventos de Mercado e LLM]] |
 | Broker Paper/Binance | Estado de ordens, posições e conta | Binance exige API key | Implementado | [[06 - Segurança e Risco]] |
