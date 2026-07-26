@@ -11,7 +11,7 @@ projeto: "[[Aegis]]"
 tipo: nota
 status: ativo
 created: 2026-07-23
-updated: 2026-07-24
+updated: 2026-07-26
 ---
 
 # Visão Geral
@@ -23,19 +23,21 @@ updated: 2026-07-24
 - Núcleo operacional em Go (`trading-core`).
 - Modo PAPER com conta simulada de US$ 10.000.
 - Broker paper e adapters para Binance testnet/real.
-- Porta para Quant Engine externo — hoje falando com o modo `fake` local; ver abaixo.
+- Porta para Quant Engine externo — `fake` (default) ou `grpc` (client real contra o `quant-engine`, `QUANT_MODE=grpc`); ver abaixo.
 - Porta para LLM/event intelligence.
 - PostgreSQL com migrations embutidas.
 - HTTP API, WebSocket de dashboard e worker de outbox.
 - Testes unitários, arquitetura, contrato, integração e falha.
 - **Quant Engine (Rust)** — serviço separado completo e testado, rodando de ponta a ponta (`quant-realtime` serve gRPC + HTTP). Ver [[Quant Engine]].
 - **Training Pipeline (Python)** — serviço separado completo e testado, produzindo artefatos ONNX + Model Registry que o `quant-engine` sabe ler. Ver [[Training Pipeline]].
+- **Client gRPC real do `trading-core`** contra os 15 RPCs do `quant-engine` — sinal em tempo real (`EvaluateSignal`/`AnalyzeMarketRegime`) mais 13 endpoints HTTP novos (`backtest`, `optimization`, `dataset`, `strategy`, `quant/*`, `decisions/{id}/outcome`). `QUANT_MODE` continua `fake` por padrão. Ver ADR 0010 do `trading-core`.
+- **Gatilho automático de treino** (26/07/2026) — `trading-core` detecta ociosidade (zero posições/ordens abertas) e publica `quant.activity.changed`; `training-pipeline` treina, avalia e promove um modelo até `APPROVED` sozinho, publicando `quant.model.approved` pro `quant-engine` recarregar, sem intervenção manual. Armazenamento híbrido: volume local compartilhado no caminho crítico, S3 só como backup de durabilidade. Validado por um smoke test real dos três serviços juntos. Ver [[Training Pipeline]].
 
 ## Fora de escopo nesta entrega
 
-- Client gRPC real do `trading-core` contra o `quant-engine` — o serviço Rust já existe e roda; falta o lado Go migrar do modo `fake` para o contrato `quant.v1` completo.
-- Endpoint HTTP de backtest do `trading-core` chamando o motor real do `quant-engine` — o motor (`RunBacktest`/`GetBacktestResult`/`StreamBacktestProgress`) já existe e é testado no Rust; falta o `trading-core` expô-lo via `POST /v1/backtest/request`.
-- Integração real ponta a ponta entre `training-pipeline` e um dataset de verdade exportado pelo `quant-engine` — hoje só há testes contra fixtures sintéticos.
+- Integração real ponta a ponta entre `training-pipeline` e um dataset de verdade exportado pelo `quant-engine` — o gatilho automático (acima) já roda ponta a ponta, mas ainda só contra fixtures sintéticos.
+- `trading-core` buscar candles históricos por conta própria para os novos endpoints de backtest/otimização/features — o caller precisa fornecer o array de candles, espelhando o próprio contrato gRPC do `quant-engine`.
+- `RegisterDecisionOutcome` disparado automaticamente pela reconciliação de ordens (hoje é caller-supplied via HTTP).
 - Dashboard TypeScript.
 - Infraestrutura cloud.
 

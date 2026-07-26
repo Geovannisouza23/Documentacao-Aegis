@@ -11,7 +11,7 @@ projeto: "[[Aegis]]"
 tipo: fonte-dados
 status: ativo
 created: 2026-07-23
-updated: 2026-07-24
+updated: 2026-07-26
 ---
 
 # Fontes de Dados
@@ -25,8 +25,8 @@ Fontes de dados são entradas externas ou internas que alimentam decisões, visu
 | Binance Futures WebSocket | Candles fechados | Não | Implementado | [[Market Data Binance]] |
 | Binance Futures REST klines | Candles históricos/backfill | Não | Implementado como client | [[Market Data Binance]] |
 | Quant Engine fake | Sinal quantitativo | Não | Implementado, em uso pelo `trading-core` | [[Quant Engine]] |
-| Quant Engine gRPC (`quant.v1`) | Sinal quantitativo, features, backtest, otimização | Depende do serviço | Serviço Rust implementado e testado; client Go real pendente | [[Quant Engine]] |
-| Model Registry (`training-pipeline`) | Modelos ONNX + metadata para inferência | Não (filesystem local) | Serviço Python implementado e testado; `quant-engine` só lê, nunca escreve | [[Training Pipeline]] |
+| Quant Engine gRPC (`quant.v1`) | Sinal quantitativo, features, backtest, otimização | Depende do serviço | Serviço Rust implementado e testado; client Go real implementado (15 RPCs) e validado por 6 testes de integração contra o container real | [[Quant Engine]] |
+| Model Registry (`training-pipeline`) | Modelos ONNX + metadata para inferência | Não (filesystem local, opcionalmente S3 como backup) | Serviço Python implementado e testado; treino agora dispara automaticamente por ociosidade do `trading-core`, validado ponta a ponta; `quant-engine` só lê, nunca escreve | [[Training Pipeline]] |
 | RSS | Notícias/eventos | Não | Provider implementado, scheduler pendente | [[Eventos de Mercado e LLM]] |
 | LLM noop/Gemini | Classificação de eventos | Gemini exige API key | Implementado | [[Eventos de Mercado e LLM]] |
 | Broker Paper/Binance | Estado de ordens, posições e conta | Binance exige API key | Implementado | [[06 - Segurança e Risco]] |
